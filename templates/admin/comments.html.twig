@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+
+<div>
+    <h1>Listes des commentaires signalés</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+            <th scope="col">Post Id</th>
+            <th scope="col">Auteur</th>
+            <th scope="col">Contenu</th>
+            <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for comment in comments %}
+            <tr>
+                <td>
+                    {{ comment.post.id }}
+                </td>
+                <td>
+                    {{ comment.user.email }}
+                </td>
+                <td>
+                    {{ comment.content }}
+                </td>
+                <td>
+                    <a href="{{ path('comment_delete', {'id': comment.id}) }}" class="btn btn-outline-danger">Supprimer</a>
+                    <a href="{{ path('comment_valid', {'id': comment.id}) }}" class="btn btn-outline-success">Valider</a>
+                    
+                </td>
+            </tr>
+
+
+        {% endfor %}   
+        
+        </tbody>
+    </table>
+    
+</div>
+{% endblock %}

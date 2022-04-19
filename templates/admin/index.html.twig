@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+
+<div class="adminPanel">
+<h1>Administration</h1>
+<a href="{{ path('admin_posts') }}"> Listes des articles</a></br>
+<a href="{{ path('admin_comments') }}"> Listes des commentaires signalés</a></br>
+<a href="{{ path('post_create') }}"> Créer un article</a></br>
+</div>
+{% endblock %}
+

@@ -1,0 +1,9 @@
+twig:
+    default_path: '%kernel.project_dir%/templates'
+    form_themes: ['bootstrap_5_layout.html.twig']
+    globals: 
+        public_folder: '%kernel.project_dir%/public/'
+
+when@test:
+    twig:
+        strict_variables: true

@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+
+<div>
+    <h1>Liste des posts</h1>
+    <div class="posts">
+        {% for post in posts %}
+                <div>
+                    <h3>{{ post.title }}</h3>
+                    <p>{{ post.content }}</p>
+                    <a href="{{ path('post_get', {'id': post.id}) }}" class="btn btn-primary">Voir plus</a>
+                </div>
+        {% endfor %}
+    </div>
+
+</div>
+
+
+{% endblock %}
