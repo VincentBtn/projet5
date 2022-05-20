@@ -8,11 +8,23 @@
     <div>
         <h3>{{ post.title }}</h3>
         <p>{{ post.content }}</p>
+    {% for comment in post.comments %}
+    {% if comment.reported == false %}
+    <h4>{{ comment.user.email }}</h4>
+    <p>{{ comment.content }}</p>
+    <a href="{{ path('comment_report', {'id': comment.id}) }}" class="btn btn-outline-danger">Signaler</a>
+    {% endif %}
+    {% endfor %}
     </div>
+
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
     <h2>Laisser un commentaire : </h2>
     <div>
     {{ form(form) }}
     </div>
+    {% else %}
+    <a href="{{ path('login') }}" class="btn btn-primary">Veuillez vous connecter pour laisser un commentaire.</a>
+    {% endif %}
 
 
 </div>

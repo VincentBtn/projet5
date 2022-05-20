@@ -33,7 +33,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/create-post", name="post_create")
+     * @Route("/create-post", name="admin_post_create")
      */
     public function createPost(Request $request, FileUploader $fileUploader, ManagerRegistry $doctrine): Response 
     {
@@ -162,7 +162,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/post-update/{id}", name="post_update")
+     * @Route("/post-update/{id}", name="admin_post_update")
      */
     public function updatePost(int $id, ManagerRegistry $doctrine, FileUploader $fileUploader, Request $request): Response
     {

@@ -3,8 +3,8 @@ class Diaporama {
       this.index = 0
       this.container = document.getElementById(idDiaporama);
       this.slides = this.container.querySelectorAll("figure");
-      this.nextButton = this.container.querySelector(".next");
-      this.previousButton = this.container.querySelector(".previous")
+      this.nextButton = this.container.querySelector(".diapo-next");
+      this.previousButton = this.container.querySelector(".diapo-previous")
       this.playButton = this.container.querySelector(".play")
       this.stopButton = this.container.querySelector(".stop")
       this.refresh()

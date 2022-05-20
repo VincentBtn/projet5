@@ -7,8 +7,10 @@ use App\Repository\PostRepository;
 use App\Entity\Post;
 use App\Form\CommentType;
 use App\Form\Type\PostType;
+use App\Repository\CommentRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -21,9 +23,12 @@ class PostController extends AbstractController
 {
     private $repository;
 
-    public function __construct(PostRepository $postRepository)
+    private $commentRepository;
+
+    public function __construct(PostRepository $postRepository, CommentRepository $commentRepository)
     {
        $this->repository = $postRepository;
+       $this->commentRepository = $commentRepository;
     }
 
     /**
@@ -70,6 +75,27 @@ class PostController extends AbstractController
             'post' => $post,
             'form' => $form->createView()
         ]);
+    }
+
+    /**
+     * @Route("/comment-report/{id}", name="comment_report")
+     */
+    public function reportComment(int $id, ManagerRegistry $doctrine): RedirectResponse
+    {
+        $entityManager = $doctrine->getManager();
+        $comment = $this->commentRepository->find($id);
+        if ($comment) {
+
+            $comment->setReported(true);
+            $entityManager->flush();
+        }
+
+        $this->addFlash(
+            'danger',
+            'Commentaire signalé'
+        );
+
+        return $this->redirectToRoute('post_get', ['id' => $comment->getPost()->getId()]);
     }
    
 
